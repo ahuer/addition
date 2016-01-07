@@ -7,6 +7,20 @@ public class LinkedListAddition {
 		carry = 0;
 	}
 	
+	public Node add(Node num1, Node num2) throws NumberFormatException {
+		if (num1 == null || num2 == null ) {
+			throw new NumberFormatException("Linked List provided was null");
+		}
+		
+		Node sum = null;
+		Node firstNum = num1;
+		Node secondNum = num2;
+		while (firstNum != null ) {
+			
+		}
+		return sum;
+	}
+	
 	public static Node createReversedLinkedListFromString(String numberString) throws NumberFormatException{
 		if (numberString == null || numberString.isEmpty() ) {
 			throw new NumberFormatException("String provided was null or empty");
@@ -37,10 +51,10 @@ public class LinkedListAddition {
 		Node currentNode = node;
 		while (currentNode != null ) {
 			int value = currentNode.getValue();
-			s.append(value);
+			s.insert(0,value); //prepend
 			currentNode = currentNode.getNext();
 		}
 		return s.toString();
-	}
+	}	
 
 }
