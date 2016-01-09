@@ -12,13 +12,59 @@ public class LinkedListAddition {
 			throw new NumberFormatException("Linked List provided was null");
 		}
 		
-		Node sum = null;
+		Node sumFirstDigit = null;
+		Node sumCurrentDigit = null;		
 		Node firstNum = num1;
 		Node secondNum = num2;
+		
 		while (firstNum != null ) {
+			int sum = firstNum.getValue();
+			firstNum = firstNum.getNext();
 			
+			if (secondNum != null ) {
+				sum += secondNum.getValue();
+				secondNum = secondNum.getNext();
+			}			
+			sum += carry;
+			carry = 0;
+			
+			if (sum > 9 ) {
+				carry = sum / 10;
+				sum = sum % 10;
+			}
+			
+			Node digit = new Node(sum);
+			if (sumFirstDigit == null ) {
+				sumFirstDigit = digit;
+				sumCurrentDigit = digit;
+				continue;
+			}
+			
+			sumCurrentDigit.setNext(digit);
+			sumCurrentDigit = digit;
 		}
-		return sum;
+		
+		while (secondNum != null ) {
+			int sum = carry + secondNum.getValue();
+			carry = 0;
+			
+			if (sum > 9 ) {
+				carry = sum / 10;
+				sum = sum % 10;
+			}
+			
+			Node digit = new Node(sum);
+			secondNum = secondNum.getNext();
+			sumCurrentDigit.setNext(digit);
+			sumCurrentDigit = digit;
+		}
+		
+		if (carry > 0 ) {
+			Node digit = new Node(carry);
+			sumCurrentDigit.setNext(digit);
+		}
+		
+		return sumFirstDigit;
 	}
 	
 	public static Node createReversedLinkedListFromString(String numberString) throws NumberFormatException{
